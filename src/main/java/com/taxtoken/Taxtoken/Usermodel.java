@@ -33,4 +33,17 @@ public class Usermodel {
 		}
 		return "no user found";
 	}
+	
+	
+public int returnAge(String name){
+		
+		for(int i=0;i<this.userList.size();i++){
+			User user =this.userList.get(i);
+			if(name.equalsIgnoreCase(user.getName())){
+				return user.getAge();
+			}
+			
+		}
+		return 0;
+	}
 }

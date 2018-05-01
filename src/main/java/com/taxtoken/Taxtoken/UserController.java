@@ -13,7 +13,7 @@ public class UserController {
 	Usermodel users = new Usermodel();
 
 	/**
-	 * Mapping the request for returning the birthday with the parameter in the
+	 * Mapping the request for returning the birthday associated with the name in the
 	 * path
 	 * 
 	 */
@@ -22,6 +22,17 @@ public class UserController {
 	public String getBirthday(@PathVariable(value = "name") String name) {
 
 		return users.findBirthday(name);
+	}
+	
+	/**
+	 * Mapping the request for returning the age associates with the name in the path
+	 * path
+	 * 
+	 */
+	
+	@RequestMapping(path="/{name}/age")
+	public int getAge(@PathVariable(value="name") String name){
+		return users.returnAge(name);
 	}
 
 }
