@@ -1,7 +1,12 @@
 package com.taxtoken.Taxtoken;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -18,7 +23,7 @@ public class UserController {
 	 * 
 	 */
 
-	@RequestMapping(path = "/{name}/birthday/")
+	@RequestMapping(path = "/{name}/birthday")
 	public String getBirthday(@PathVariable(value = "name") String name) {
 
 		return users.findBirthday(name);
@@ -34,5 +39,13 @@ public class UserController {
 	public int getAge(@PathVariable(value="name") String name){
 		return users.returnAge(name);
 	}
+	
+	@RequestMapping(value="/user", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<User> saveUser(@RequestBody User user){
+		users.userList.add(user);
+		return new ResponseEntity<User>(users.userList.get(users.userList.size()-1),HttpStatus.OK);
+	}
+	
 
 }

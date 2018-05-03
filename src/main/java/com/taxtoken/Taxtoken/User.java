@@ -8,6 +8,22 @@ package com.taxtoken.Taxtoken;
  *
  */
 public class User {
+	
+	public User(){
+		
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 
 	private String name;
 	private String birthday;
