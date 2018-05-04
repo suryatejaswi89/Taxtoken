@@ -47,5 +47,13 @@ public class UserController {
 		return new ResponseEntity<User>(users.userList.get(users.userList.size()-1),HttpStatus.OK);
 	}
 	
+	@RequestMapping(path="/user/{name}", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<User> updateUser(@PathVariable(value="name") String name, @RequestBody User user){
+		User user1 = users.findUser(name);
+		user1.setBirthday(user.getBirthday());
+		user1.setAge(user.getAge());
+		return new ResponseEntity<User>(user1,HttpStatus.OK);
+	}
 
 }

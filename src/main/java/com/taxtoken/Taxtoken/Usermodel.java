@@ -1,6 +1,7 @@
 package com.taxtoken.Taxtoken;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Usermodel {
 
@@ -17,6 +18,8 @@ public class Usermodel {
 		userList.add(aarya);
 
 	}
+	
+	Iterator itr = userList.iterator();
 
 	/*
 	 * Method to return the birthday of the user matching with the name given
@@ -46,4 +49,16 @@ public int returnAge(String name){
 		}
 		return 0;
 	}
+
+public User findUser(String name){
+	
+	for(int i=0;i<this.userList.size();i++){
+		User user = this.userList.get(i);
+		if(name.equalsIgnoreCase(user.getName())){
+			return user;
+		}
+	}
+	return null;
+	
+}
 }
