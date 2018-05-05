@@ -19,7 +19,7 @@ public class Usermodel {
 
 	}
 	
-	Iterator itr = userList.iterator();
+	Iterator<User> itr = userList.iterator();
 
 	/*
 	 * Method to return the birthday of the user matching with the name given

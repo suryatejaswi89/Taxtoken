@@ -2,17 +2,35 @@
 * 
 */
 package com.taxtoken.Taxtoken;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Teja
  *
  */
+@Entity
 public class User {
 	
-	public User(){
+	protected User(){
 		
 	}
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	private String name;
+	private String birthday;
+	private int age;
+
+	public User(String name, String birthday, int age) {
+		this.name = name;
+		this.birthday = birthday;
+		this.age = age;
+
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -23,17 +41,6 @@ public class User {
 
 	public void setAge(int age) {
 		this.age = age;
-	}
-
-	private String name;
-	private String birthday;
-	private int age;
-
-	public User(String name, String birthday, int age) {
-		this.name = name;
-		this.birthday = birthday;
-		this.age = age;
-
 	}
 
 	public String getName() {
@@ -47,5 +54,6 @@ public class User {
 	public int getAge() {
 		return age;
 	}
+	
 
 }
