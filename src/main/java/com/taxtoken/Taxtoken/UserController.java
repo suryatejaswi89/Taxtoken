@@ -39,6 +39,7 @@ public class UserController {
 	 */
 	
 	@RequestMapping(path="/{name}/age")
+	@ResponseBody
 	public int getAge(@PathVariable(value="name") String name){
 		User user=userRepo.findByName(name);
 		return user.getAge();
@@ -54,6 +55,7 @@ public class UserController {
 		userRepo.save(user);
 		return new ResponseEntity<User>(userRepo.save(user),HttpStatus.OK);
 	}
+	
 	
 	@RequestMapping(path="/user/{name}", method = RequestMethod.PUT)
 	@ResponseBody
