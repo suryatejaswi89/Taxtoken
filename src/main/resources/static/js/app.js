@@ -39,7 +39,7 @@ $(document).ready(function() {
 
       $.ajax(settings).done(function(response) {
             console.log("User had been successfully created");
-            $("#user_creation_status").text(JSON.stringify(response));
+            $("#user_creation_status").text("User has been successfully created");
         });
         // stop the form from submitting the normal way and refreshing the page
         //event.preventDefault();
