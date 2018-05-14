@@ -28,7 +28,7 @@ public class UserController {
 	 * 
 	 */
 
-	@RequestMapping(path = "/{name}/birthday")
+	@RequestMapping(path = "/{name}/birthday", method = RequestMethod.GET)
 	public String getBirthday(@PathVariable(value = "name") String name) {
 		User user = userRepo.findByName(name);
 		return user.getBirthday();
@@ -40,7 +40,7 @@ public class UserController {
 	 * 
 	 */
 
-	@RequestMapping(path = "/{name}/age")
+	@RequestMapping(path = "/{name}/age",  method = RequestMethod.GET)
 	@ResponseBody
 	public int getAge(@PathVariable(value = "name") String name) {
 		User user = userRepo.findByName(name);
