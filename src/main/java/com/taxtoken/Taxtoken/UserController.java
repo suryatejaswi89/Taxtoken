@@ -21,6 +21,9 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepo;
 	
+	@Autowired
+	private UserService userService;
+	
 
 	/**
 	 * Mapping the request for returning the birthday associated with the name
@@ -29,11 +32,10 @@ public class UserController {
 	 */
 
 	@RequestMapping(path = "/{name}/birthday", method = RequestMethod.GET)
-	public String getBirthday(@PathVariable(value = "name") String name) {
-		
-		User user = userRepo.findByName(name);
-		return user.getBirthday();
+public String getBirthday(@PathVariable(value = "name") String name) {
+		return userService.getBirthday(name);
 	}
+	
 
 	/**
 	 * Mapping the request for returning the age associates with the name in the
@@ -44,9 +46,8 @@ public class UserController {
 	@RequestMapping(path = "/{name}/age",  method = RequestMethod.GET)
 	@ResponseBody
 	public int getAge(@PathVariable(value = "name") String name) {
+		return userService.getAge(name);
 		
-		User user = userRepo.findByName(name);
-		return user.getAge();
 	}
 
 	/**
@@ -57,23 +58,19 @@ public class UserController {
 	@ResponseBody
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		String name = user.getName();
-		if(userRepo.existsByName(name)){
-			return new ResponseEntity<User>(userRepo.findByName(name), HttpStatus.CONFLICT);
-		}
-		return new ResponseEntity<User>(userRepo.save(user), HttpStatus.OK);
-		
+		String birthday = user.getBirthday();
+		int age = user.getAge();
+		return userService.createUser(name, birthday, age);
 	}
 
 	
 	@RequestMapping(path = "/user/{name}", method = RequestMethod.PUT)
 	@ResponseBody
 	public ResponseEntity<User> updateUser(@PathVariable(value = "name") String name, @RequestBody User user) {
-		
-			User user1 = userRepo.findByName(name);
-			user1.setBirthday(user.getBirthday());
-			user1.setAge(user.getAge());
-			userRepo.save(user1);
-			return new ResponseEntity<User>(user1, HttpStatus.OK);
+			String birthday = user.getBirthday();
+			int age = user.getAge();
+			return userService.updateUser(name, birthday, age);
+			
 		
 	}
 
