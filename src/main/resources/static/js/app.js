@@ -44,6 +44,12 @@ $(document).ready(function() {
         // stop the form from submitting the normal way and refreshing the page
         //event.preventDefault();
     });
+    
+    $(".back_to_homepage").click(function(event){
+		$("#home").show();
+		 $("#create_user").hide();
+      $("#find_user").hide();
+});
 
     //process the find user form
 
