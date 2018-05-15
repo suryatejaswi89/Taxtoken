@@ -30,6 +30,7 @@ public class UserController {
 
 	@RequestMapping(path = "/{name}/birthday", method = RequestMethod.GET)
 	public String getBirthday(@PathVariable(value = "name") String name) {
+		
 		User user = userRepo.findByName(name);
 		return user.getBirthday();
 	}
@@ -43,6 +44,7 @@ public class UserController {
 	@RequestMapping(path = "/{name}/age",  method = RequestMethod.GET)
 	@ResponseBody
 	public int getAge(@PathVariable(value = "name") String name) {
+		
 		User user = userRepo.findByName(name);
 		return user.getAge();
 	}
@@ -54,8 +56,12 @@ public class UserController {
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<User> createUser(@RequestBody User user) {
-		userRepo.save(user);
+		String name = user.getName();
+		if(userRepo.existsByName(name)){
+			return new ResponseEntity<User>(userRepo.findByName(name), HttpStatus.CONFLICT);
+		}
 		return new ResponseEntity<User>(userRepo.save(user), HttpStatus.OK);
+		
 	}
 
 	
